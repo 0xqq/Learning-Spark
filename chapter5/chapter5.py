@@ -146,7 +146,3 @@ hiveCtx=HiveContext(sc)
 rows=hiveCtx.sql("SELECT name,age from users")
 firstRow=rows.first()
 print firstRow.name
-
-
-
-
