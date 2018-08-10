@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="ivy-report.xsl"?>
+<ivy-report version="1.0">
+	<info
+		organisation="learning-spark-mini-example"
+		module="learning-spark-mini-example_2.11"
+		revision="1.0"
+		conf="provided"
+		confs="compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, pom, scala-tool"
+		date="20180803114955"/>
+	<dependencies>
+		<module organisation="org.apache.spark" name="spark-core_2.11">
+			<revision name="1.3.1" evicted="latest-revision" evicted-reason="" downloaded="false" searched="false" conf="default(compile)" position="-1">
+				<evicted-by rev="2.2.0"/>
+				<caller organisation="learning-spark-mini-example" name="learning-spark-mini-example_2.11" conf="provided" rev="1.3.1" rev-constraint-default="1.3.1" rev-constraint-dynamic="1.3.1" callerrev="1.0"/>
+				<artifacts>
+				</artifacts>
+			</revision>
+			<revision name="2.2.0" error="Resolution failed several times for dependency: org.apache.spark#spark-core_2.11;2.2.0 {provided=[default(compile)]}:: 
+	Resolution failed several times for dependency: org.apache.spark#spark-parent_2.11;2.2.0 {}:: 
+	Spray Repository: unable to get resource for org/apache/spark#spark-parent_2.11;2.2.0: res=http://repo.spray.cc/org/apache/spark/spark-parent_2.11/2.2.0/spark-parent_2.11-2.2.0.jar: java.net.UnknownHostException: repo.spray.cc: Name or service not known
+	Spray Repository: unable to get resource for org/apache/spark#spark-parent_2.11;2.2.0: res=http://repo.spray.cc/org/apache/spark/spark-parent_2.11/2.2.0/spark-parent_2.11-2.2.0.pom: java.net.UnknownHostException: repo.spray.cc
+	Twitter4J Repository: unable to get resource for org/apache/spark#spark-parent_2.11;2.2.0: res=http://twitter4j.org/maven2/org/apache/spark/spark-parent_2.11/2.2.0/spark-parent_2.11-2.2.0.pom: java.net.SocketException: Connection reset
+	Spray Repository: unable to get resource for org/apache/spark#spark-parent_2.11;2.2.0: res=http://repo.spray.cc/org/apache/spark/spark-parent_2.11/2.2.0/spark-parent_2.11-2.2.0.jar: java.net.UnknownHostException: repo.spray.cc: Name or service not known
+	Twitter Maven Repo: unable to get resource for org/apache/spark#spark-parent_2.11;2.2.0: res=http://maven.twttr.com/org/apache/spark/spark-parent_2.11/2.2.0/spark-parent_2.11-2.2.0.pom: java.net.SocketTimeoutException: connect timed out
+
+	Spray Repository: unable to get resource for org/apache/spark#spark-core_2.11;2.2.0: res=http://repo.spray.cc/org/apache/spark/spark-core_2.11/2.2.0/spark-core_2.11-2.2.0.pom: java.net.UnknownHostException: repo.spray.cc: Name or service not known
+	Twitter4J Repository: unable to get resource for org/apache/spark#spark-core_2.11;2.2.0: res=http://twitter4j.org/maven2/org/apache/spark/spark-core_2.11/2.2.0/spark-core_2.11-2.2.0.pom: java.net.SocketException: Connection reset
+	Resolution failed several times for dependency: org.apache.spark#spark-parent_2.11;2.2.0 {}:: 
+	Spray Repository: unable to get resource for org/apache/spark#spark-parent_2.11;2.2.0: res=http://repo.spray.cc/org/apache/spark/spark-parent_2.11/2.2.0/spark-parent_2.11-2.2.0.jar: java.net.UnknownHostException: repo.spray.cc: Name or service not known
+	Spray Repository: unable to get resource for org/apache/spark#spark-parent_2.11;2.2.0: res=http://repo.spray.cc/org/apache/spark/spark-parent_2.11/2.2.0/spark-parent_2.11-2.2.0.pom: java.net.UnknownHostException: repo.spray.cc
+	Twitter4J Repository: unable to get resource for org/apache/spark#spark-parent_2.11;2.2.0: res=http://twitter4j.org/maven2/org/apache/spark/spark-parent_2.11/2.2.0/spark-parent_2.11-2.2.0.pom: java.net.SocketException: Connection reset
+	Spray Repository: unable to get resource for org/apache/spark#spark-parent_2.11;2.2.0: res=http://repo.spray.cc/org/apache/spark/spark-parent_2.11/2.2.0/spark-parent_2.11-2.2.0.jar: java.net.UnknownHostException: repo.spray.cc
+	Twitter Maven Repo: unable to get resource for org/apache/spark#spark-parent_2.11;2.2.0: res=http://maven.twttr.com/org/apache/spark/spark-parent_2.11/2.2.0/spark-parent_2.11-2.2.0.pom: java.net.SocketTimeoutException: connect timed out
+
+	Twitter Maven Repo: unable to get resource for org/apache/spark#spark-core_2.11;2.2.0: res=http://maven.twttr.com/org/apache/spark/spark-core_2.11/2.2.0/spark-core_2.11-2.2.0.pom: java.net.SocketTimeoutException: connect timed out
+" downloaded="false" searched="false" conf="default(compile)" position="-1">
+				<caller organisation="learning-spark-mini-example" name="learning-spark-mini-example_2.11" conf="provided" rev="2.2.0" rev-constraint-default="2.2.0" rev-constraint-dynamic="2.2.0" callerrev="1.0"/>
+				<artifacts>
+				</artifacts>
+			</revision>
+		</module>
+	</dependencies>
+</ivy-report>

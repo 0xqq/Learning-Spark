@@ -5,7 +5,7 @@ sys.setdefaultencoding('utf-8')
 # @Author: appleyuchi
 # @Date:   2018-07-27 16:20:03
 # @Last Modified by:   appleyuchi
-# @Last Modified time: 2018-07-27 16:21:07
+# @Last Modified time: 2018-08-10 14:09:05
 
 
 
@@ -79,7 +79,7 @@ countryContactCounts.saveAsTextFile("result")
 
 
 #这个代码的目的是根据电报的callsign来判断到底给发给哪个国家
-#但是,这个代码到底什么问题?首先,如果我给出错误的callsign,他就会给出错误的结果,也就是会根据一个不存在的callsign给出一个胡乱匹配的国家
+#但是,这个代码存在什么缺陷呢?首先,如果我给出错误的callsign,他就会给出错误的结果,也就是会根据一个不存在的callsign给出一个胡乱匹配的国家
 #也就是说,这个代码只能查询 files/callsign_tbl_sorted中已经存在的前缀,例如3CZ,如果想查询该文件中不存在的callsign,就会给出错误的结果
 #另外,作者提供的代码中,pos忘记-1了,这里已经修正
 
@@ -102,8 +102,33 @@ def processCallSigns(signs):
     return filter(lambda x: x[1] is not None, result)
 
 
+# 上述代码使用的API文档链接:
+# http://73s.com/api
+# 我们在终端中发送请求(也就是输入下面的命令)会发现,只有n7ice这个callsign没有过期,其余都可以过期了.
+# curl -X GET http://73s.com/qsos/n7ice.json
+
+# 所有的callsign如下:
+# W8PAL
+# KK6JKQ
+# W6BB
+# VE3UOW
+# VE2CUA
+# VE2UN
+# OH2TI
+# GB1MIR
+# K2AMH
+# UA1LO
+# N7ICE(只有这个是有效的)
+# 如果我们在终端输入
+# curl -X GET http://73s.com/qsos/UA1LO.json就会返回NULL,所以除了N7ICE,其余都过期了.
+
+
+
+
 def fetchCallSigns(input):
     """Fetch call signs"""
     return input.mapPartitions(lambda callSigns: processCallSigns(callSigns))
+
+print"*"*100
 
 contactsContactList = fetchCallSigns(validSigns)

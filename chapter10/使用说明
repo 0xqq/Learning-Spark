@@ -1,0 +1,2 @@
+需要注意的是%和%%的区别，导入scopt库时，github上的写法是libraryDependencies+="com.github.scopt"%%"scopt"%"3.5.0"，%%表示sbt会自动在库名称后面加上scala的版本号，在本例中，就是会自动加上“_2.11”然后去maven库中去查找。
+

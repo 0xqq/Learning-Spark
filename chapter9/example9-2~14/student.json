@@ -1,0 +1,4 @@
+{ "_id" : { "$oid" : "5b6c53e3a8bfe1bb6c095937" }, "name" : "Cheung-updated", "age" : "22", "sex" : "男", "class" : "计算机2班" }
+{ "_id" : { "$oid" : "5b6c540cc0288274ee83a9f5" }, "name" : "王五", "age" : "22", "sex" : "男", "class" : "计算机2班" }
+{ "_id" : { "$oid" : "5b6c540cc0288274ee83a9f6" }, "name" : "赵六", "age" : "22", "sex" : "女", "phone" : "18513081650", "class" : "计算机1班" }
+{ "_id" : { "$oid" : "5b6c56371a4cdf249b65bb19" }, "name" : "俞驰", "age" : 24, "sex" : "Beijing", "class" : "微电子2班" }
