@@ -1,0 +1,56 @@
+运行方法：
+
+第１步，启动hdfs系统
+./start-dfs.sh &
+－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－
+第２步，首先生成假冒的网络日志用来模拟实验输入：
+mkdir -p /tmp/logs
+./fakelogs.sh
+然后会在/tmp/logs路径下生成假冒的网络日志（因为要模仿实验结果，所以先用假的代替）
+－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－
+第3步,在HDFS系统上建立２个文件夹，并把前面生成的数据上传到HDFS系统
+hadoop fs -mkdir /tmp/logs
+hadoop fs -mkdir /tmp/outpandas
+hdfs dfs -put /tmp/logs/* /tmp/logs
+－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－
+下面注意，这是一个scala(含有main)+java混编的maven工程，pom.xml会比较特殊
+第4步，
+mvn clean scala:compile compile package
+－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－
+
+第５步（这一步是有问题的，因为实际上需要的是动态的流数据，而不是静态数据）
+hadoop  fs  -cp  /tmp/logs/logdata.txt  /tmp/logs/logdata
+
+－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－
+
+第6步,如果命令行运行，那么：
+
+在pom.xml所在路径下，输入
+/home/appleyuchi/bigdata/spark-2.3.1-bin-hadoop2.7/bin/spark-submit \
+--jars /home/appleyuchi/bigdata/apache-maven-3.5.4/jar_warehouse/com/github/scopt/scopt_2.11/3.3.0/scopt_2.11-3.3.0.jar \
+--class "com.scalalearn.scala.main.LogAnalyzerAppMain" \
+--master local[4] /home/appleyuchi/Desktop/java和scala混编调研/混编转向书上的案例/target/scalalearn-1.0-SNAPSHOT.jar \
+--logs_directory /tmp/logs
+
+
+Intellij运行，那么run configuration中设置如下:
+Main.class设置为com.scalalearn.scala.main.LogAnalyzerAppMain
+VM options设置为-Dspark.master=local
+－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－
+
+最终实验结果：
+什么都没有，因为这个代码只检测＂流数据＂，不检测＂静态数据＂，我们拷贝文件过去，是属于＂静态数据＂,streaming是检测不到的．
+只能进入本章第三个实验，配合Kafaka，让kafka提供动态的＂流数据＂让spark-streaming读取
+
+下面这个连接中提到的办法我已经试过了，我写了脚本往hdfs中的/tmp/logs路径下不停的拷贝数据，然后启动Intellij中的主函数，
+依然检测不到．
+是否检测到数据的依据是我在LogAnalyzerAppMain.scala中增加的一句代码：
+println("logData="+logData.print())
+如果运行时这句代码输出为()，那么就表示数据没有被检测到
+https://blog.csdn.net/young_so_nice/article/details/51629049
+
+
+
+附：
+如果碰到namenode处于safe mode模式，那么输入：
+dfsadmin -safemode leave
