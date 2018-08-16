@@ -13,25 +13,30 @@ import org.apache.hadoop.io.{ArrayWritable, BooleanWritable, BytesWritable, Doub
 /**
  * Computes various pieces of information on a sliding window form the log input
  */
-object LogAnalyzerWindowed {
-  def responseCodeCount(accessLogRDD: RDD[ApacheAccessLog]) = {
+object LogAnalyzerWindowed 
+{
+  def responseCodeCount(accessLogRDD: RDD[ApacheAccessLog]) = 
+  {
     accessLogRDD.map(log => (log.getResponseCode(), 1)).reduceByKey((x, y) => x + y)
   }
 
-  def processAccessLogs(accessLogsDStream: DStream[ApacheAccessLog], opts: Config) {
+  def processAccessLogs(accessLogsDStream: DStream[ApacheAccessLog], opts: Config) 
+  {
     val ipDStream = accessLogsDStream.map{entry => entry.getIpAddress()}
     val ipAddressRequestCount = ipDStream.countByValueAndWindow(
       opts.getWindowDuration(), opts.getSlideDuration())
 
+
+    ipAddressRequestCount.print()
     ipAddressRequestCount.saveAsTextFiles(opts.OutputDirectory + "/ipAddressRequestCountsTXT")
     val writableIpAddressRequestCount = ipAddressRequestCount.map{case (ip, count) =>(new Text(ip), new LongWritable(count))}
    
 
     writableIpAddressRequestCount.saveAsHadoopFiles[SequenceFileOutputFormat[Text, LongWritable]](opts.OutputDirectory + "/ipAddressRequestCounts", "pandas")
-    
+    writableIpAddressRequestCount.print()
     val requestCount = accessLogsDStream.countByWindow(opts.getWindowDuration(), opts.getSlideDuration())
     requestCount.print()
-    ipAddressRequestCount.print()
+    ipAddressRequestCount.print()//这句话用来观察统计结果
     val accessLogsWindow = accessLogsDStream.window(
       opts.getWindowDuration(), opts.getSlideDuration())
     accessLogsWindow.transform(rdd => responseCodeCount(rdd)).print()

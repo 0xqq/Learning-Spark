@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
-rm /tmp/logs/logdata
-touch /tmp/logs/logdata
+rm /tmp/logs/logdata.txt
+touch /tmp/logs/logdata.txt
 tail -f /tmp/logs/logdata | nc -lk 9999 &
 TAIL_NC_PID=$!
 cat ./fake_logs/log1.log >> /tmp/logs/logdata
