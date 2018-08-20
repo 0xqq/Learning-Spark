@@ -1,0 +1,9 @@
+javac MLlib.java
+java MLlib
+
+
+scalac MLlib.scala
+scala MLlib
+
+
+python MLlib.py

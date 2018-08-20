@@ -1,4 +1,3 @@
-$FLUME_HOME/lib下面的scala-library.jar版本必须为2.11.8或者以上,不能低于这个版本,否则实验效果不一定能保证
 运行方法：
 
 第１步，启动hdfs系统
